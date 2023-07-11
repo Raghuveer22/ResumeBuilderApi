@@ -1,0 +1,4 @@
+node_modules/
+pdfservices-api-credentials.json
+private.key
+certificate_pub.crt 
