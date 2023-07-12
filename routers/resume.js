@@ -1,7 +1,7 @@
 const express = require('express');
 const apiRouter = express.Router();
 const fs = require('fs'); // Add this line to import the fs module
-const { validateFields, validateHeaders } = require('./validation');
+const { validateFields, validateHeaders } = require('../src/validation');
 const { generatePDF } = require('../src/pdf');
 const { docxPaths } = require('../src/constants');
 

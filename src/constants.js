@@ -1,7 +1,7 @@
 const docxPaths = {
-    "1": "./templates/Template1/BasicTemplate.docx",
-    "2": "./templates/Template2/LinkTemplate.docx",
-    "3": "./templates/Template3/ImageTemplate.docx"
+    "1": "./Templates/Template1/BasicTemplate.docx",
+    "2": "./Templates/Template2/LinkTemplate.docx",
+    "3": "./Templates/Template3/ImageTemplate.docx"
   };
 
 const resumeSuccessData= {
