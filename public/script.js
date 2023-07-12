@@ -9,7 +9,6 @@ const carouselText = document.getElementById('carouselText');
 var activeIndex=0;
 carousel.addEventListener('slid.bs.carousel', function (event) {
 activeIndex = event.to;
-var captionDiv = document.querySelector('.carousel-item.active .carousel-caption');
 carouselText.innerHTML = dictionary[activeIndex+1];
 carouselText.classList.add('highlight');
 });
