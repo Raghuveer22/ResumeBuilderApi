@@ -1,18 +1,18 @@
 const express = require('express');
 const apiRouter = express.Router();
 const fs = require('fs'); // Add this line to import the fs module
-const { validateFields, validateHeaders } = require('../src/validation');
-const { generatePDF } = require('../src/pdf');
+const { ValidateFields, ValidateHeaders } = require('../src/validation');
+const { GeneratePDF } = require('../src/pdf');
 const { docxPaths } = require('../src/constants');
 
 // POST route for generating a resume
 apiRouter.post('/resume', async (req, res) => {
-  const headersError = validateHeaders(req);
+  const headersError = ValidateHeaders(req);
   if (headersError) {
     return res.status(401).json({ error: headersError});
   }
 
-  const fieldsError = validateFields(req);
+  const fieldsError = ValidateFields(req);
   if (fieldsError) {
     return res.status(400).json({ error: fieldsError});
   }
@@ -32,7 +32,7 @@ apiRouter.post('/resume', async (req, res) => {
       return res.status(404).json({ error: 'Template not found' });
     }
 
-    const outputPath = await generatePDF(req.body);
+    const outputPath = await GeneratePDF(req.body);
     const pdfContent = fs.readFileSync(outputPath);
 
     // Set the response headers

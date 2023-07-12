@@ -2,7 +2,7 @@ const supertest = require("supertest");
 const app = require("../src/api-app");
 const { resumeSuccessData } = require('../src/constants');
 const { expect } = require("@jest/globals");
-const { generatePDF } = require('../src/pdf');
+
 
 const server = app.listen(0, () => {
   const port = server.address().port;
@@ -10,7 +10,7 @@ const server = app.listen(0, () => {
 });
 
 jest.mock('../src/pdf', () => ({
-  generatePDF: jest.fn().mockImplementation(() => {
+  GeneratePDF : jest.fn().mockImplementation(() => {
     throw new Error('Internal Server Error');
   }),
 }));

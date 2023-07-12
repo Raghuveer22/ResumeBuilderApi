@@ -12,7 +12,7 @@ const server = app.listen(0, () => {
   console.log(`Server started on port ${port}`);
 });
 
-function excludeParameter(data, paramName) {
+function ExcludeParameter(data, paramName) {
   const newData = JSON.parse(JSON.stringify(data));
   delete newData[paramName];
   return newData;
@@ -35,7 +35,7 @@ describe("POST /resume with missing required fields", () => {
   for (const field of resumeFieldKeys) {
     test(`should respond with a 400 status code when ${field} is missing`, async () => {
       const paramName = field;
-      const data = excludeParameter(resumeSuccessData, paramName);
+      const data = ExcludeParameter(resumeSuccessData, paramName);
       const response = await supertest(app)
         .post("/resume")
         .set("Accept", "application/pdf")
@@ -68,7 +68,7 @@ describe("POST /resume with missing fields in personal information", () => {
     test(`should respond with a 400 status code when ${field} is missing in personal information`, async () => {
       const data = JSON.parse(JSON.stringify(resumeSuccessData));
       const paramName = field;
-      data.personal_information = excludeParameter(resumeSuccessData.personal_information, paramName);
+      data.personal_information = ExcludeParameter(resumeSuccessData.personal_information, paramName);
       const response = await supertest(app)
         .post("/resume")
         .set("Accept", "application/pdf")

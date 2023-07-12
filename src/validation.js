@@ -1,15 +1,17 @@
-const { error } = require("console");
-
-function isLinkedInURL(link) {
+// Regular expression for validating LinkedIn URL
+function IsLinkedInURL(link) {
   const regex = /^https?:\/\/(www\.)?linkedin\.com\/.*$/i;
   return regex.test(link);
 }
-function isValidPhoneNumber(phoneNumber) {
-  const phoneNumberRegex = /^\+\d{1,3}\s\d{4,}$/;// Regex for +91 897888 format
+
+// Regular expression for validating phone number
+function IsValidPhoneNumber(phoneNumber) {
+  const phoneNumberRegex = /^\+\d{1,3}\s\d{4,}$/; // Regex for +91 897888 format
   return phoneNumberRegex.test(phoneNumber);
 }
 
-function validateFields(req) {
+// Validate the fields in the request body
+function ValidateFields(req) {
   const {
     template_id,
     personal_information,
@@ -21,6 +23,7 @@ function validateFields(req) {
     achievements
   } = req.body;
 
+  // Check for missing required fields
   if (
     !template_id ||
     !personal_information ||
@@ -34,24 +37,24 @@ function validateFields(req) {
     return { error: 'Missing required fields' };
   }
 
+  // Check the data type of template_id
   if (typeof template_id !== 'string') {
     return { error: 'template_id must be a string.' };
-  }  
-  
+  }
 
+  // Validate personal_information object
   if (
     typeof personal_information !== 'object' ||
     !personal_information.name ||
     !personal_information.last_name ||
     !personal_information.email_address ||
     !personal_information.phone_number ||
-    !personal_information.linkedin_url 
-    ||!isLinkedInURL(personal_information.linkedin_url)
-    ||!isValidPhoneNumber(personal_information.phone_number)
+    !personal_information.linkedin_url ||
+    !IsLinkedInURL(personal_information.linkedin_url) ||
+    !IsValidPhoneNumber(personal_information.phone_number)
   ) {
     return {
-
-      error: 'personal_information must be an object with name, last_name, email, phone_number, and a valid LinkedIn URL'
+      error: 'personal_information must be an object with name, last_name, email_address, phone_number, and a valid LinkedIn URL'
     };
   }
 
@@ -63,31 +66,37 @@ function validateFields(req) {
     }
   }
 
+  // Validate job_title field
   if (typeof job_title !== 'string') {
     return { error: 'job_title must be a string.' };
   }
 
+  // Validate career_objective field
   if (typeof career_objective !== 'string') {
     return { error: 'career_objective must be a string.' };
   }
 
+  // Validate skills array
   if (!Array.isArray(skills) || !skills.every(skill => typeof skill === 'string')) {
     return { error: 'skills must be an array of strings.' };
   }
 
-  if (!Array.isArray(education) || !education.every(edu => validateEducation(edu))) {
+  // Validate education array
+  if (!Array.isArray(education) || !education.every(edu => ValidateEducation(edu))) {
     return {
       error: 'education must be an array of objects with school_name, passing_year, and description fields of valid types.'
     };
   }
 
-  if (!Array.isArray(experience) || !experience.every(exp => validateExperience(exp))) {
+  // Validate experience array
+  if (!Array.isArray(experience) || !experience.every(exp => ValidateExperience(exp))) {
     return {
       error: 'experience must be an array of objects with company_name, passing_year, and responsibilities fields of valid types.'
     };
   }
 
-  if (!Array.isArray(achievements) || !achievements.every(ach => validateAchievement(ach))) {
+  // Validate achievements array
+  if (!Array.isArray(achievements) || !achievements.every(ach => ValidateAchievement(ach))) {
     return {
       error: 'achievements must be an array of objects with field and awards fields of valid types.'
     };
@@ -96,7 +105,8 @@ function validateFields(req) {
   return null; // No validation error
 }
 
-function validateEducation(edu) {
+// Validate the education object
+function ValidateEducation(edu) {
   if (
     typeof edu === 'object' &&
     edu.school_name &&
@@ -111,7 +121,8 @@ function validateEducation(edu) {
   return false;
 }
 
-function validateExperience(exp) {
+// Validate the experience object
+function ValidateExperience(exp) {
   if (
     typeof exp === 'object' &&
     exp.company_name &&
@@ -126,7 +137,8 @@ function validateExperience(exp) {
   return false;
 }
 
-function validateAchievement(ach) {
+// Validate the achievement object
+function ValidateAchievement(ach) {
   if (
     typeof ach === 'object' &&
     ach.field &&
@@ -139,7 +151,8 @@ function validateAchievement(ach) {
   return false;
 }
 
-function validateHeaders(req) {
+// Validate the headers in the request
+function ValidateHeaders(req) {
   if (
     !req.headers['accept'] ||
     req.headers['accept'] !== 'application/pdf' ||
@@ -152,4 +165,4 @@ function validateHeaders(req) {
   return null; // No validation error
 }
 
-module.exports = { validateFields, validateHeaders };
+module.exports = { ValidateFields, ValidateHeaders };
