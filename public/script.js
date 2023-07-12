@@ -61,7 +61,7 @@ skillsContainer.appendChild(deleteButton);
 function addEducation() {
 const educationContainer = document.getElementById('educationContainer');
 const schoolNameInput = createInputField('education[][school_name]', '', true, 'Enter school name'); // Add placeholder
-const passingYearInput = createInputField('education[][passing_year]', '', true, 'Enter passing year'); // Add placeholder
+const passingYearInput = createInputField('education[][passing_year]', '', true, 'Enter passing year: Ex:2018-2019'); // Add placeholder
 const descriptionTextarea = createTextArea('education[][description]', '', true, 'Enter a description'); // Add placeholder
 const deleteButton = createDeleteButton(schoolNameInput, passingYearInput, descriptionTextarea);
 educationContainer.appendChild(schoolNameInput);
@@ -73,7 +73,7 @@ educationContainer.appendChild(deleteButton);
 function addExperience() {
 const experienceContainer = document.getElementById('experienceContainer');
 const companyNameInput = createInputField('experience[][company_name]', '', true, 'Enter company name'); // Add placeholder
-const positionInput = createInputField('experience[][passing_year]', '', true, 'Enter passing year'); // Add placeholder
+const positionInput = createInputField('experience[][passing_year]', '', true, 'Enter passing year: Ex:2019-2020'); // Add placeholder
 const responsibilitiesTextarea = createTextArea('experience[][responsibilities]', '', true, 'Enter responsibilities'); // Add placeholder
 const deleteButton = createDeleteButton(companyNameInput, positionInput, responsibilitiesTextarea);
 experienceContainer.appendChild(companyNameInput);
