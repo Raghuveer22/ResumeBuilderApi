@@ -218,10 +218,10 @@ form.addEventListener('submit', (event) => {
       window.open(url, '_blank');
       console.log(url);
       console.log(blob);
-      // Alternatively, you can set the URL as the source of an iframe to display it within the page
-      // const iframe = document.createElement('iframe');
-      // iframe.src = url;
-      // document.body.appendChild(iframe);
+    //   Alternatively, you can set the URL as the source of an iframe to display it within the page
+    //   const iframe = document.createElement('iframe');
+    //   iframe.src = url;
+    //   document.body.appendChild(iframe);
     })
     .catch(error => {
       // Handle any errors that occurred during the request
