@@ -31,6 +31,8 @@ The file structure of the project is organized as follows:
 │   ├── server.js
 │   ├── validation.js
 │   └── view-app.js
+├── temp
+├── Templates(Templates Data)
 ├── views
 │   └── form.ejs
 ├── .gitignore
