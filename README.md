@@ -57,8 +57,22 @@ To set up the API, follow these steps:
    npm i
    ```
 
-3. Place the `pdfservices-api-credentials.json` file in the root folder of the project.
 
+3. Place the `pdfservices-api-credentials.json` file in the root folder of the project.
+set the env variables
+
+**Windows (CMD):**
+```shell
+set PDF_SERVICES_CLIENT_ID=<YOUR_CLIENT_ID>
+set PDF_SERVICES_CLIENT_SECRET=<YOUR_CLIENT_SECRET>
+```
+
+**MacOS/Linux:**
+```shell
+export PDF_SERVICES_CLIENT_ID=<YOUR_CLIENT_ID>
+export PDF_SERVICES_CLIENT_SECRET=<YOUR_CLIENT_SECRET>
+```
+.
 ## Technologies Used
 
 The technologies used in this API are:
