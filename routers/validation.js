@@ -54,11 +54,9 @@ function validateFields(req) {
     return null; // No validation error
   }
   
-function validateHeaders(req) {
-    if (
-      req.headers['accept'] !== 'application/pdf' ||
-      req.headers['content-type'] !== 'application/json'
-    ) {
+  function validateHeaders(req) {
+    if (!req.headers['accept'] || req.headers['accept'] !== 'application/pdf' ||
+        !req.headers['content-type'] || req.headers['content-type'] !== 'application/json') {
       return { error: 'Invalid headers' };
     }
   

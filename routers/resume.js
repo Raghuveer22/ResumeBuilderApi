@@ -14,7 +14,7 @@ apiRouter.post('/resume', async (req, res) => {
 
   const fieldsError = validateFields(req);
   if (fieldsError) {
-    return res.status(400).json({ error: fieldsError });
+    return res.status(400).json({ error: 'Bad Request' });
   }
 
   try {
