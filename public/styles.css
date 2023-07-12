@@ -1,38 +1,15 @@
-/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
 }
-
-.container {
-    /* margin-left: 30px; */
-    margin-top: 20px;
-    /* margin-right:30px; */
-}
-
-/* Form Styles */
 form {
-    display: grid;
-    max-width: 900px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-left: 4px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-h2 {
-    margin-top: 10px;
-    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 label {
     display: block;
     margin-top: 10px;
-    font-weight: bold;
 }
 
 input[type="text"],
@@ -47,6 +24,25 @@ textarea {
     margin-bottom: 10px;
 }
 
+input[type="file"] {
+    display: none;
+}
+
+.file-upload {
+    background-color: #f1f1f1;
+    color: #555;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.file-upload input[type="file"]+span {
+    margin-left: 5px;
+}
+
 button[type="button"],
 button[type="submit"] {
     background-color: #4CAF50;
@@ -56,7 +52,6 @@ button[type="submit"] {
     border-radius: 4px;
     cursor: pointer;
     margin-top: 10px;
-    transition: background-color 0.3s ease;
 }
 
 button[type="button"]:hover,
@@ -64,14 +59,14 @@ button[type="submit"]:hover {
     background-color: #45a049;
 }
 
-
 #skillsContainer,
 #educationContainer,
 #experienceContainer,
 #achievementsContainer {
-    /* border: 1px solid #ccc; */
+    border: 1px solid #ccc;
     border-radius: 4px;
-    padding-bottom: 10px;
+    padding: 10px;
+    margin-top: 10px;
 }
 
 .delete-button {
@@ -82,7 +77,6 @@ button[type="submit"]:hover {
     border-radius: 4px;
     cursor: pointer;
     margin-top: 5px;
-    transition: background-color 0.3s ease;
 }
 
 .delete-button:hover {
@@ -90,81 +84,75 @@ button[type="submit"]:hover {
 }
 
 /* Carousel Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    background-color: black;
+    /*z-index: 100;*/
+}
+form{
+    position: relative;
+    top: 60px;
 
+}
 .carousel {
     position: sticky;
-    background-color: #f1f1f1;
-    border-radius: 4px;
-    overflow: hidden;
-    height: auto;
-    /* Set height to auto to adjust according to image height */
-    transition: height 0.3s ease; /* Add a transition to smoothly adjust the height */
+    top: 56px; /* Adjust the value to match the height of your navbar */
+    height: 80vh;/* Adjust the value to account for navbar height */
+    background-color: transparent; 
+    border: none; 
+}
+
+.highlight {
+    /* Define the styles to highlight the carousel text */
+    /* For example, you can change the background color and text color */
+    background-color: yellow;
+    color: black;
 }
 
 .carousel-inner img {
-    max-height: calc(90vh - 20px);
-    /* Subtract the navbar height and margin from viewport height */
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 80vh; /* Adjust the percentage to your desired height */
+    width: auto;
+    height: auto;
 }
 
 .carousel-control-prev,
 .carousel-control-next {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    transition: background-color 0.3s ease;
-    background-color:rgba(0, 0, 0, 0.1);
-    color: white;
-    padding: auto;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
+    z-index: 10;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: transparent;
-    background-size: cover;
+    background-color: #000;
     width: 30px;
     height: 30px;
-    border: none;
-    outline: none;
-    margin-top: 10px;
+    border-radius: 50%;
 }
 
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-.78.78 2.47 2.47H0v1h6.94L4.47 7.22 5.25 8l3-3L5.25 0z'/%3e%3c/svg%3e");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0L1.28.78 4.75 4.25H8v1H1.06L3.53 7.22 2.75 8l-3-3L2.75 0z'/%3e%3c/svg%3e");
 }
 
 .carousel-caption {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    width: 100%;
+    position: sticky;
+    bottom: 0;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
 }
 
 @media (max-width: 767px) {
-    .carousel-container {
-        width: 100%;
-        /* Set the width to 100% on smaller screens */
-        float: none;
-        /* Remove the float on smaller screens */
-        margin-bottom: 30px;
-    }
-
     .carousel {
-        height: 100%;
-        /* Set the height to 100% of the container on smaller screens */
-    }
-
-    .col-md-5 {
-        order: -1;
-        /* Change the order of the columns on smaller screens */
+    position: relative;
+    top: initial;
     }
 }

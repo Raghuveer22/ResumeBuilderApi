@@ -1,5 +1,3 @@
-
-
 const dictionary = {
     1: 'Basic Template',
     2: 'Link Template',
@@ -8,9 +6,10 @@ const dictionary = {
 
 const carousel = document.getElementById('carouselExampleCaptions');
 const carouselText = document.getElementById('carouselText');
-var activeIndex=0;
+
 carousel.addEventListener('slid.bs.carousel', function (event) {
-activeIndex = event.to;
+var activeIndex = event.to;
+var captionDiv = document.querySelector('.carousel-item.active .carousel-caption');
 carouselText.innerHTML = dictionary[activeIndex+1];
 carouselText.classList.add('highlight');
 });
@@ -61,7 +60,7 @@ skillsContainer.appendChild(deleteButton);
 function addEducation() {
 const educationContainer = document.getElementById('educationContainer');
 const schoolNameInput = createInputField('education[][school_name]', '', true, 'Enter school name'); // Add placeholder
-const passingYearInput = createInputField('education[][passing_year]', '', true, 'Enter passing year: Ex:2018-2019'); // Add placeholder
+const passingYearInput = createInputField('education[][passing_year]', '', true, 'Enter passing year'); // Add placeholder
 const descriptionTextarea = createTextArea('education[][description]', '', true, 'Enter a description'); // Add placeholder
 const deleteButton = createDeleteButton(schoolNameInput, passingYearInput, descriptionTextarea);
 educationContainer.appendChild(schoolNameInput);
@@ -73,7 +72,7 @@ educationContainer.appendChild(deleteButton);
 function addExperience() {
 const experienceContainer = document.getElementById('experienceContainer');
 const companyNameInput = createInputField('experience[][company_name]', '', true, 'Enter company name'); // Add placeholder
-const positionInput = createInputField('experience[][passing_year]', '', true, 'Enter passing year: Ex:2019-2020'); // Add placeholder
+const positionInput = createInputField('experience[][position]', '', true, 'Enter position'); // Add placeholder
 const responsibilitiesTextarea = createTextArea('experience[][responsibilities]', '', true, 'Enter responsibilities'); // Add placeholder
 const deleteButton = createDeleteButton(companyNameInput, positionInput, responsibilitiesTextarea);
 experienceContainer.appendChild(companyNameInput);
@@ -94,19 +93,19 @@ achievementsContainer.appendChild(deleteButton);
 
 // Add placeholders to form inputs
 const nameInput = document.getElementById('name');
-nameInput.placeholder = 'Enter your name ';
+nameInput.placeholder = 'Enter your name';
 
 const lastNameInput = document.getElementById('last_name');
 lastNameInput.placeholder = 'Enter your last name';
 
 const emailInput = document.getElementById('email_address');
-emailInput.placeholder = 'Ex:posa.mokshith@iitg.ac.in';
+emailInput.placeholder = 'Enter your email address';
 
 const phoneNumberInput = document.getElementById('phone_number');
-phoneNumberInput.placeholder = 'Example:+91 99xx99xx99x x is actual number';
+phoneNumberInput.placeholder = 'Enter your phone number';
 
 const linkedInInput = document.getElementById('linkedin_url');
-linkedInInput.placeholder = 'Ex:https://www.linkedin.com/in/posa-mokshith-99416825b/';
+linkedInInput.placeholder = 'Enter your LinkedIn URL';
 
 const jobTitleInput = document.getElementById('job_title');
 jobTitleInput.placeholder = 'Enter your job title';
@@ -134,10 +133,9 @@ form.addEventListener('submit', (event) => {
 
     const formData = new FormData(form);
     const jsonData = {
-    template_id:-1,
     personal_information: {},
     job_title:"",
-    career_objective:"",
+    carrer_objective:"",
     skills: [],
     education: [],
     experience: [],
@@ -161,7 +159,7 @@ form.addEventListener('submit', (event) => {
     }
     else if(category==='career_objective')
     {
-        jsonData.career_objective=value;
+        jsonData.carrer_objective=value;
     }
     else if (category === 'skills') {
         jsonData.skills.push(value);
@@ -201,32 +199,7 @@ form.addEventListener('submit', (event) => {
         achievementIndex+=1;
         }
     }
-    }    
-    jsonData.template_id=(activeIndex+1).toString();
+    }
+
     console.log('Form Data:', jsonData);
-    fetch('http://localhost:8080/resume', {
-    method: 'POST',
-    headers: {
-      'Accept':'application/pdf',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(jsonData)
-  })
-    .then(response => response.blob())
-    .then(blob=> {
-      // Handle the response from the server if needed
-      const url = URL.createObjectURL(blob);
-      if(response.status==200)
-      {
-          window.open(url, '_blank');
-      }
-    //   Alternatively, you can set the URL as the source of an iframe to display it within the page
-    //   const iframe = document.createElement('iframe');
-    //   iframe.src = url;
-    //   document.body.appendChild(iframe);
-    })
-    .catch(error => {
-      // Handle any errors that occurred during the request
-      console.error('Error:', error);
-    });
 });
