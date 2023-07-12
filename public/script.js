@@ -6,10 +6,10 @@ const dictionary = {
 
 const carousel = document.getElementById('carouselExampleCaptions');
 const carouselText = document.getElementById('carouselText');
-
+var activeIndex=0;
 carousel.addEventListener('slid.bs.carousel', function (event) {
-var activeIndex = event.to;
-var captionDiv = document.querySelector('.carousel-item.active .carousel-caption');
+ activeIndex = event.to;
+captionDiv = document.querySelector('.carousel-item.active .carousel-caption');
 carouselText.innerHTML = dictionary[activeIndex+1];
 carouselText.classList.add('highlight');
 });
@@ -72,7 +72,7 @@ educationContainer.appendChild(deleteButton);
 function addExperience() {
 const experienceContainer = document.getElementById('experienceContainer');
 const companyNameInput = createInputField('experience[][company_name]', '', true, 'Enter company name'); // Add placeholder
-const positionInput = createInputField('experience[][position]', '', true, 'Enter position'); // Add placeholder
+const positionInput = createInputField('experience[][passing_year]', '', true, 'Enter passing year');  // Add placeholder
 const responsibilitiesTextarea = createTextArea('experience[][responsibilities]', '', true, 'Enter responsibilities'); // Add placeholder
 const deleteButton = createDeleteButton(companyNameInput, positionInput, responsibilitiesTextarea);
 experienceContainer.appendChild(companyNameInput);
@@ -93,16 +93,16 @@ achievementsContainer.appendChild(deleteButton);
 
 // Add placeholders to form inputs
 const nameInput = document.getElementById('name');
-nameInput.placeholder = 'Enter your name';
+nameInput.placeholder = 'Enter your Name';
 
 const lastNameInput = document.getElementById('last_name');
-lastNameInput.placeholder = 'Enter your last name';
+lastNameInput.placeholder = 'Enter your Last Name';
 
 const emailInput = document.getElementById('email_address');
 emailInput.placeholder = 'Enter your email address';
 
 const phoneNumberInput = document.getElementById('phone_number');
-phoneNumberInput.placeholder = 'Enter your phone number';
+phoneNumberInput.placeholder = 'Ex +91 7013';
 
 const linkedInInput = document.getElementById('linkedin_url');
 linkedInInput.placeholder = 'Enter your LinkedIn URL';
@@ -133,9 +133,10 @@ form.addEventListener('submit', (event) => {
 
     const formData = new FormData(form);
     const jsonData = {
+    template_id:-1,
     personal_information: {},
     job_title:"",
-    carrer_objective:"",
+    career_objective:"",
     skills: [],
     education: [],
     experience: [],
@@ -159,7 +160,7 @@ form.addEventListener('submit', (event) => {
     }
     else if(category==='career_objective')
     {
-        jsonData.carrer_objective=value;
+       jsonData.career_objective=value;
     }
     else if (category === 'skills') {
         jsonData.skills.push(value);
@@ -200,6 +201,30 @@ form.addEventListener('submit', (event) => {
         }
     }
     }
-
+    jsonData.template_id=(activeIndex+1).toString();
     console.log('Form Data:', jsonData);
+    fetch('http://localhost:8080/resume', {
+        method: 'POST',
+        headers: {
+          'Accept':'application/pdf',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+      })
+        .then(response => response.blob())
+        .then(blob=> {
+          // Handle the response from the server if needed
+          const url = URL.createObjectURL(blob);
+          window.open(url, '_blank');
+          console.log(url);
+          console.log(blob);
+          // Alternatively, you can set the URL as the source of an iframe to display it within the page
+          // const iframe = document.createElement('iframe');
+          // iframe.src = url;
+          // document.body.appendChild(iframe);
+        })
+        .catch(error => {
+          // Handle any errors that occurred during the request
+          console.error('Error:', error);
+        });
 });
