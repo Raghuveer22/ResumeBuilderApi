@@ -60,7 +60,7 @@ skillsContainer.appendChild(deleteButton);
 function addEducation() {
 const educationContainer = document.getElementById('educationContainer');
 const schoolNameInput = createInputField('education[][school_name]', '', true, 'Enter school name'); // Add placeholder
-const passingYearInput = createInputField('education[][passing_year]', '', true, 'Enter passing year'); // Add placeholder
+const passingYearInput = createInputField('education[][passing_year]', '', true, '2020-1010'); // Add placeholder
 const descriptionTextarea = createTextArea('education[][description]', '', true, 'Enter a description'); // Add placeholder
 const deleteButton = createDeleteButton(schoolNameInput, passingYearInput, descriptionTextarea);
 educationContainer.appendChild(schoolNameInput);
@@ -72,7 +72,7 @@ educationContainer.appendChild(deleteButton);
 function addExperience() {
 const experienceContainer = document.getElementById('experienceContainer');
 const companyNameInput = createInputField('experience[][company_name]', '', true, 'Enter company name'); // Add placeholder
-const positionInput = createInputField('experience[][passing_year]', '', true, 'Enter passing year');  // Add placeholder
+const positionInput = createInputField('experience[][passing_year]', '', true, '2019-1919');  // Add placeholder
 const responsibilitiesTextarea = createTextArea('experience[][responsibilities]', '', true, 'Enter responsibilities'); // Add placeholder
 const deleteButton = createDeleteButton(companyNameInput, positionInput, responsibilitiesTextarea);
 experienceContainer.appendChild(companyNameInput);
@@ -102,7 +102,7 @@ const emailInput = document.getElementById('email_address');
 emailInput.placeholder = 'Enter your email address';
 
 const phoneNumberInput = document.getElementById('phone_number');
-phoneNumberInput.placeholder = 'Ex +91 7013';
+phoneNumberInput.placeholder = 'Ex +91 7013...';
 
 const linkedInInput = document.getElementById('linkedin_url');
 linkedInInput.placeholder = 'Enter your LinkedIn URL';
@@ -201,6 +201,14 @@ form.addEventListener('submit', (event) => {
         }
     }
     }
+    // Select all buttons in the form
+    const buttons = form.querySelectorAll('button');
+
+    buttons.forEach(button => {
+        button.disabled = true;
+      });
+      const loadingIcon = document.getElementById('loadingIcon');
+      loadingIcon.style.display = 'block';
     jsonData.template_id=(activeIndex+1).toString();
     console.log('Form Data:', jsonData);
     fetch('http://localhost:8080/resume', {
@@ -211,6 +219,7 @@ form.addEventListener('submit', (event) => {
         },
         body: JSON.stringify(jsonData)
       })
+      // Disable all buttons
       .then(response => {
         if (response.ok) {
             return response.blob();
@@ -224,7 +233,10 @@ form.addEventListener('submit', (event) => {
         window.open(url, '_blank');
         console.log(url);
         console.log(blob);
-
+        buttons.forEach(button => {
+            button.disabled = false;
+        });
+        loadingIcon.style.display = 'none';
         // Alternatively, you can set the URL as the source of an iframe to display it within the page
         // const iframe = document.createElement('iframe');
         // iframe.src = url;
@@ -233,7 +245,11 @@ form.addEventListener('submit', (event) => {
     .catch(error => {
         // Handle the error response
         console.error('Error:', error);
+        buttons.forEach(button => {
+            button.disabled = false;
+          });
         // Display an error message to the user
         alert('An error occurred. Please check your data and try again.');
     });
+  
 });
