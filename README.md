@@ -52,7 +52,7 @@ To set up the API, follow these steps:
 2. Install the application's dependencies by running the command:
 
    ```shell
-   npm install
+   npm i
    ```
 
 3. Place the `pdfservices-api-credentials.json` file in the root folder of the project.
@@ -65,7 +65,7 @@ The technologies used in this API are:
 - EJS: A templating engine for generating HTML markup with JavaScript.
 - Express: A web application framework for Node.js.
 - AdobePdfServices SDK: A software development kit for interacting with Adobe's PDF services.
-- Chai: An assertion library for Node.js.
+
 
 ## API Endpoints
 
