@@ -92,19 +92,19 @@ achievementsContainer.appendChild(deleteButton);
 
 // Add placeholders to form inputs
 const nameInput = document.getElementById('name');
-nameInput.placeholder = 'Enter your name';
+nameInput.placeholder = 'Enter your name ';
 
 const lastNameInput = document.getElementById('last_name');
 lastNameInput.placeholder = 'Enter your last name';
 
 const emailInput = document.getElementById('email_address');
-emailInput.placeholder = 'Enter your email address';
+emailInput.placeholder = 'Ex:posa.mokshith@iitg.ac.in';
 
 const phoneNumberInput = document.getElementById('phone_number');
-phoneNumberInput.placeholder = 'Enter your phone number';
+phoneNumberInput.placeholder = 'Example:+91 99xx99xx99x x is actual number';
 
 const linkedInInput = document.getElementById('linkedin_url');
-linkedInInput.placeholder = 'Enter your LinkedIn URL';
+linkedInInput.placeholder = 'Ex:https://www.linkedin.com/in/posa-mokshith-99416825b/';
 
 const jobTitleInput = document.getElementById('job_title');
 jobTitleInput.placeholder = 'Enter your job title';

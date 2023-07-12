@@ -110,7 +110,7 @@ To run the unit tests and view the results, use the command:
 ```shell
 npm test
 ```
-
+Conducted unit tests over 77 cases and 5 test suites
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
