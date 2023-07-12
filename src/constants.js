@@ -10,8 +10,8 @@ const resumeSuccessData= {
     "name": "Lorem",
     "last_name": "ipsum",
     "email_address": "ipsum@adobe.com",
-    "phone_number": "+91 99xx14xx99",
-    "linkedin_url": "https://www.linkedin.com"
+    "phone_number": "+91 991478199",
+    "linkedin_url": "https://www.linkedin.com/uueu"
   },
   "job_title": "Software Development Engineer",
   "career_objective": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper.",
@@ -24,19 +24,19 @@ const resumeSuccessData= {
   "education": [
     {
       "school_name": "School",
-      "passing_year": "201X-201Y",
+      "passing_year": "2010-2010",
       "description": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by  injected humour, or randomised words which don't look even slightly believable."
     },
     {
       "school_name": "College",
-      "passing_year": "203X-203Y",
+      "passing_year": "2038-2039",
       "description": "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc"
     }
   ],
   "experience": [
     {
       "company_name": "Adobe",
-      "passing_year": "201X-201Y",
+      "passing_year": "2019-2018",
       "responsibilities": "It is a long established fact that a reader will be distracted by the readable content. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod"
     }
   ],

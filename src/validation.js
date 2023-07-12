@@ -5,8 +5,7 @@ function isLinkedInURL(link) {
   return regex.test(link);
 }
 function isValidPhoneNumber(phoneNumber) {
-  const phoneNumberRegex = /^\+\d+$/; // Regex for +91 897888 format
-
+  const phoneNumberRegex = /^\+\d{1,3}\s\d{4,}$/;// Regex for +91 897888 format
   return phoneNumberRegex.test(phoneNumber);
 }
 
@@ -37,25 +36,27 @@ function validateFields(req) {
 
   if (typeof template_id !== 'string') {
     return { error: 'template_id must be a string.' };
-  }
+  }  
+  
 
   if (
     typeof personal_information !== 'object' ||
     !personal_information.name ||
     !personal_information.last_name ||
-    !personal_information.email ||
+    !personal_information.email_address ||
     !personal_information.phone_number ||
-    !personal_information.linkedin_url ||
-    !isLinkedInURL(personal_information.linkedin_url)||
-    isValidPhoneNumber(personal_information.phone_number)
+    !personal_information.linkedin_url 
+    ||!isLinkedInURL(personal_information.linkedin_url)
+    ||!isValidPhoneNumber(personal_information.phone_number)
   ) {
     return {
+
       error: 'personal_information must be an object with name, last_name, email, phone_number, and a valid LinkedIn URL'
     };
   }
 
   // Check if all personal_information fields are strings
-  const personalInfoFields = ['name', 'last_name', 'email', 'phone_number', 'linkedin_url'];
+  const personalInfoFields = ['name', 'last_name', 'email_address', 'phone_number', 'linkedin_url'];
   for (const field of personalInfoFields) {
     if (typeof personal_information[field] !== 'string') {
       return { error: `personal_information.${field} must be a string.` };

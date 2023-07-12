@@ -9,12 +9,12 @@ const { docxPaths } = require('../src/constants');
 apiRouter.post('/resume', async (req, res) => {
   const headersError = validateHeaders(req);
   if (headersError) {
-    return res.status(401).json({ error: 'Unauthorised' });
+    return res.status(401).json({ error: headersError});
   }
 
   const fieldsError = validateFields(req);
   if (fieldsError) {
-    return res.status(400).json({ error: 'Bad Request' });
+    return res.status(400).json({ error: fieldsError});
   }
 
   try {
