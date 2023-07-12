@@ -1,20 +1,22 @@
 const express = require('express');
 const apiRouter = express.Router();
-const fs = require('fs'); // Add this line to import the fs module
+const fs = require('fs');
 const { ValidateFields, ValidateHeaders } = require('../src/validation');
 const { GeneratePDF } = require('../src/pdf');
 const { docxPaths } = require('../src/constants');
 
 // POST route for generating a resume
 apiRouter.post('/resume', async (req, res) => {
+  // Validate request headers
   const headersError = ValidateHeaders(req);
   if (headersError) {
-    return res.status(401).json({ error: headersError});
+    return res.status(401).json({ error: headersError });
   }
 
+  // Validate request fields
   const fieldsError = ValidateFields(req);
   if (fieldsError) {
-    return res.status(400).json({ error: fieldsError});
+    return res.status(400).json({ error: fieldsError });
   }
 
   try {
@@ -28,10 +30,13 @@ apiRouter.post('/resume', async (req, res) => {
       experience,
       achievements
     } = req.body;
+
+    // Check if the specified template_id exists
     if (!docxPaths.hasOwnProperty(template_id)) {
       return res.status(404).json({ error: 'Template not found' });
     }
 
+    // Generate the PDF file
     const outputPath = await GeneratePDF(req.body);
     const pdfContent = fs.readFileSync(outputPath);
 
@@ -41,6 +46,8 @@ apiRouter.post('/resume', async (req, res) => {
 
     // Send the PDF file as the response
     res.send(pdfContent);
+
+    // Clean up the temporary file
     fs.unlinkSync(outputPath);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
@@ -48,3 +55,4 @@ apiRouter.post('/resume', async (req, res) => {
 });
 
 module.exports = apiRouter;
+

@@ -1,7 +1,7 @@
 const supertest = require("supertest");
 const app = require("../src/api-app");
 const { expect } = require("@jest/globals");
-const { resumeSuccessData, resumeFieldTypes, personalInformationFieldTypes } = require('../src/constants');
+const { resumeSuccessData, resumeFieldTypes, personalInformationFieldTypes,notMatchingLinkedInURLs,notMatchingPhoneNumbers} = require('../src/constants');
 
 
 const resumeFieldKeys = Object.keys(resumeFieldTypes);
@@ -63,6 +63,24 @@ describe("POST /resume with invalid data types for fields", () => {
   }
 });
 
+describe("POST /resume with objects instead of arrays", () => {
+  for (const field in resumeFieldTypes) {
+    if (resumeFieldTypes[field] === "array") {
+      test(`should respond with a 400 status code when ${field} has an object instead of an array`, async () => {
+        const data = JSON.parse(JSON.stringify(resumeSuccessData));
+        data[field] = data[field][0];
+        const response = await supertest(app)
+          .post("/resume")
+          .set("Accept", "application/pdf")
+          .set("Content-Type", "application/json")
+          .send(data);
+
+        expect(response.status).toEqual(400);
+      }, 30000);
+    }
+  }
+});
+
 describe("POST /resume with missing fields in personal information", () => {
   for (const field of personalInformationFieldKeys) {
     test(`should respond with a 400 status code when ${field} is missing in personal information`, async () => {
@@ -96,20 +114,36 @@ describe("POST /resume with wrong data types in personal information fields", ()
   }
 });
 
-describe("POST /resume with objects instead of arrays", () => {
-  for (const field in resumeFieldTypes) {
-    if (resumeFieldTypes[field] === "array") {
-      test(`should respond with a 400 status code when ${field} has an object instead of an array`, async () => {
-        const data = JSON.parse(JSON.stringify(resumeSuccessData));
-        data[field] = data[field][0];
-        const response = await supertest(app)
-          .post("/resume")
-          .set("Accept", "application/pdf")
-          .set("Content-Type", "application/json")
-          .send(data);
+describe("POST /resume with phone_number in personal details", () => {
+  for(phone_number in notMatchingPhoneNumbers)
+  {
+    test(`should respond with a 400 status code when phone_number has an invalid data type in personal information (scenario: alphanumeric value)`, async () => {
+      const data = JSON.parse(JSON.stringify(resumeSuccessData));
+      data.personal_information["phone_number"] = phone_number;
+      const response = await supertest(app)
+        .post("/resume")
+        .set("Accept", "application/pdf")
+        .set("Content-Type", "application/json")
+        .send(data);
+  
+      expect(response.status).toEqual(400);
+    }, 30000);
+  }
+});
 
-        expect(response.status).toEqual(400);
-      }, 30000);
-    }
+describe("POST /resume with LinkedIn URL in personal details", () => {
+  for (url in notMatchingLinkedInURLs)
+  {
+    test(`should respond with a 400 status code ${url} not satisfy general linkedin profile url regex pattern`, async () => {
+      const data = JSON.parse(JSON.stringify(resumeSuccessData));
+      data.personal_information["linkedin_url"] = url;
+      const response = await supertest(app)
+      .post("/resume")
+      .set("Accept", "application/pdf")
+      .set("Content-Type", "application/json")
+      .send(data);
+      
+      expect(response.status).toEqual(400);
+    }, 30000);
   }
 });

@@ -11,7 +11,7 @@ const resumeSuccessData= {
     "last_name": "ipsum",
     "email_address": "ipsum@adobe.com",
     "phone_number": "+91 991478199",
-    "linkedin_url": "https://www.linkedin.com/uueu"
+    "linkedin_url": "https://www.linkedin.com/in/posa-mokshith-99416825b/"
   },
   "job_title": "Software Development Engineer",
   "career_objective": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper.",
@@ -86,6 +86,33 @@ const achievementFieldTypes={
   awards:"string"
 }
 
+const notMatchingLinkedInURLs = [
+  'https://linkedin.com',
+  'http://www.linkedin.com',
+  'https://www.linkedin.com/',
+  'https://linkedin.com/in/',
+  'https://www.linkedin.com/in/john-doe/',
+  'https://linkedin.com/pub/',
+  'https://www.linkedin.com/pub/john-doe/',
+  'https://linkedin.com/company/',
+  'https://www.linkedin.com/company/example-company/',
+  'https://www.linked.com/company/example-company/',
+  'https://linkedin.com/groups/',
+  'https://www.linkedin.com/groups/example-group/',
+  'https://linkedin.com/edu/',
+  'https://www.linkedin.com/edu/school-name/',
+  'https://linkedin.com/feed/',
+  'https://www.linkedin.com/feed/news/',
+  'https://www.google.com/'
+];
+
+const notMatchingPhoneNumbers=[
+  "+1 123",
+  "1233455",
+  "123",
+  "+12 89",
+  "+1 "]
+
 module.exports = {
     docxPaths,
     resumeSuccessData,
@@ -93,6 +120,8 @@ module.exports = {
     personalInformationFieldTypes,
     educationFieldTypes,
     experienceFieldTypes,
-    achievementFieldTypes
+    achievementFieldTypes,
+    notMatchingLinkedInURLs,
+    notMatchingPhoneNumbers,
 };
   

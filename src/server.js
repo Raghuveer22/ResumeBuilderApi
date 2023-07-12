@@ -1,8 +1,8 @@
 const viewApp = require('./view-app');
 const apiApp = require('./api-app');
 
-const viewPort = 3000; // Port for the view app
-const apiPort = 8080; // Port for the API app
+const viewPort = 3000||process.env.VIEW_PORT; // Port for the view app
+const apiPort = 8080||process.env.API_PORT; // Port for the API app
 
 // Start the view app server
 viewApp.listen(viewPort, () => {

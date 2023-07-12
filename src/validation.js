@@ -1,6 +1,6 @@
 // Regular expression for validating LinkedIn URL
 function IsLinkedInURL(link) {
-  const regex = /^https?:\/\/(www\.)?linkedin\.com\/.*$/i;
+  const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|pub|company|groups|edu|feed)\/[a-zA-Z0-9\-]+\/?$/;
   return regex.test(link);
 }
 
