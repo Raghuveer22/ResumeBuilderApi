@@ -1,5 +1,5 @@
-const viewApp = require('./viewApp');
-const apiApp = require('./apiApp');
+const viewApp = require('./view-app');
+const apiApp = require('./api-app');
 
 const viewPort = 3000;
 const apiPort = 8080;

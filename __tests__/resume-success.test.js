@@ -1,5 +1,5 @@
 const supertest = require("supertest");
-const app = require("../src/apiApp");
+const app = require("../src/api-app");
 const { expect } = require("@jest/globals");
 const {resumeSuccessData}=require('../src/constants');
 const server = app.listen(0, () => {

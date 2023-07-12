@@ -1,3 +1,5 @@
+const { error } = require("console");
+
 function validateFields(req) {
     const {
       template_id,
@@ -26,7 +28,10 @@ function validateFields(req) {
     if (typeof template_id !== 'string') {
       return { error: 'template_id must be a string.' };
     }
-  
+    if(typeof personal_information!=='object' && personal_information.name && personal_information.last_name && personal_information.email && personal_information.phone_number &&personal_information.linkedin_url)
+    {
+      return {error: 'personal_information must be an object with name, last_name, email, phone_number and linkedin_url'};
+    }
     if (typeof job_title !== 'string') {
       return { error: 'job_title must be a string.' };
     }

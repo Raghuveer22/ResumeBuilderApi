@@ -3,6 +3,7 @@ const docxPaths = {
     "2": "./Templates/Template2/LinkTemplate.docx",
     "3": "./Templates/Template3/ImageTemplate.docx"
   };
+
 const resumeSuccessData= {
   "template_id": "1",
   "personal_information": {
@@ -50,7 +51,48 @@ const resumeSuccessData= {
     }
   ]
 };
-  module.exports = {
-    docxPaths,resumeSuccessData
-  };
+
+
+const resumeFieldTypes={
+  template_id: "string",
+  personal_information: "object",
+  job_title: "string",
+  career_objective: "string",
+  skills: "array",
+  education: "array",
+  experience: "array",
+  achievements: "array"
+}
+const personalInformationFieldTypes={
+  name:"string",
+  last_name:"string",
+  email_address:"string",
+  phone_number:"string",
+  linkedin_url:"string"
+}
+
+const educationFieldTypes={
+  school_name:"string",
+  passing_year:"string",
+  description:"string"
+} 
+const experienceFieldTypes={
+  company_name:"string",
+  passing_year:"string",
+  responsibilities:"string"
+} 
+const achievementFieldTypes={
+  field:"string",
+  awards:"string"
+}
+
+module.exports = {
+    docxPaths,
+    resumeSuccessData,
+    resumeFieldTypes,
+    personalInformationFieldTypes,
+    educationFieldTypes,
+    experienceFieldTypes,
+    achievementFieldTypes
+};
   
