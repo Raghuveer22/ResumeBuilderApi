@@ -1,9 +1,11 @@
+const mailRegexPattern=/^[\w\.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/;
+const linkedinProfileURLRegexPattern=/^(https?:\/\/)?(www\.)?linkedin\.com\/(in|pub|company|groups|edu|feed)\/[a-zA-Z0-9\-]+\/?$/;
+const phoneNumberRegexPattern= /^\+\d{1,3}\s\d{4,}$/;
 const docxPaths = {
     "1": "./Templates/Template1/BasicTemplate.docx",
     "2": "./Templates/Template2/LinkTemplate.docx",
     "3": "./Templates/Template3/ImageTemplate.docx"
   };
-
 const resumeSuccessData= {
   "template_id": "1",
   "personal_information": {
@@ -111,9 +113,20 @@ const notMatchingPhoneNumbers=[
   "1233455",
   "123",
   "+12 89",
-  "+1 "]
+  "+1 "];
+
+const notMatchingEmails=[
+  "23823",
+  "absdwqd",
+  "asa@HSDUIFH",
+  "MOSHIT_HH@FH.com",
+  "88787@21r3f.c",
+]
 
 module.exports = {
+    mailRegexPattern,
+    linkedinProfileURLRegexPattern,
+    phoneNumberRegexPattern,
     docxPaths,
     resumeSuccessData,
     resumeFieldTypes,
@@ -123,5 +136,6 @@ module.exports = {
     achievementFieldTypes,
     notMatchingLinkedInURLs,
     notMatchingPhoneNumbers,
+    notMatchingEmails
 };
   

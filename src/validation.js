@@ -1,13 +1,21 @@
+
+const {mailRegexPattern,linkedinProfileURLRegexPattern,phoneNumberRegexPattern} = require("../src/constants");
+
+
 // Regular expression for validating LinkedIn URL
 function IsLinkedInURL(link) {
-  const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|pub|company|groups|edu|feed)\/[a-zA-Z0-9\-]+\/?$/;
+  const regex = linkedinProfileURLRegexPattern;
   return regex.test(link);
 }
 
 // Regular expression for validating phone number
 function IsValidPhoneNumber(phoneNumber) {
-  const phoneNumberRegex = /^\+\d{1,3}\s\d{4,}$/; // Regex for +91 897888 format
+  const phoneNumberRegex = phoneNumberRegexPattern// Regex for +91 897888 format
   return phoneNumberRegex.test(phoneNumber);
+}
+function IsValidEmail(email) {
+  const regexPattern = mailRegexPattern;
+  return regexPattern.test(email);
 }
 
 // Validate the fields in the request body
@@ -50,11 +58,12 @@ function ValidateFields(req) {
     !personal_information.email_address ||
     !personal_information.phone_number ||
     !personal_information.linkedin_url ||
+    !IsValidEmail(personal_information.email_address)||
     !IsLinkedInURL(personal_information.linkedin_url) ||
     !IsValidPhoneNumber(personal_information.phone_number)
   ) {
     return {
-      error: 'personal_information must be an object with name, last_name, email_address, phone_number, and a valid LinkedIn URL'
+      error: 'personal_information must be an object with name, last_name, email_address, valid phone_number, and a valid LinkedIn URL and valid email'
     };
   }
 

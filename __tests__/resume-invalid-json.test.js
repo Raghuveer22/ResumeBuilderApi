@@ -1,7 +1,7 @@
 const supertest = require("supertest");
 const app = require("../src/api-app");
 const { expect } = require("@jest/globals");
-const { resumeSuccessData, resumeFieldTypes, personalInformationFieldTypes,notMatchingLinkedInURLs,notMatchingPhoneNumbers} = require('../src/constants');
+const { resumeSuccessData, resumeFieldTypes, personalInformationFieldTypes,notMatchingLinkedInURLs,notMatchingPhoneNumbers,notMatchingEmails} = require('../src/constants');
 
 
 const resumeFieldKeys = Object.keys(resumeFieldTypes);
@@ -114,7 +114,7 @@ describe("POST /resume with wrong data types in personal information fields", ()
   }
 });
 
-describe("POST /resume with phone_number in personal details", () => {
+describe("POST /resume with phone_number not matching to  regex pattern in personal details", () => {
   for(phone_number in notMatchingPhoneNumbers)
   {
     test(`should respond with a 400 status code when phone_number has an invalid data type in personal information (scenario: alphanumeric value)`, async () => {
@@ -131,7 +131,7 @@ describe("POST /resume with phone_number in personal details", () => {
   }
 });
 
-describe("POST /resume with LinkedIn URL in personal details", () => {
+describe("POST /resume with invalid LinkedIn URL  personal details", () => {
   for (url in notMatchingLinkedInURLs)
   {
     test(`should respond with a 400 status code ${url} not satisfy general linkedin profile url regex pattern`, async () => {
@@ -147,3 +147,20 @@ describe("POST /resume with LinkedIn URL in personal details", () => {
     }, 30000);
   }
 });
+
+describe("POST /resume with invalid Email in personal details", () => {
+  for (email in notMatchingEmails)
+  {
+    test(`should respond with a 400 status code ${url} not satisfy general linkedin profile url regex pattern`, async () => {
+      const data = JSON.parse(JSON.stringify(resumeSuccessData));
+      data.personal_information["email_address"] = email;
+      const response = await supertest(app)
+      .post("/resume")
+      .set("Accept", "application/pdf")
+      .set("Content-Type", "application/json")
+      .send(data);
+      expect(response.status).toEqual(400);
+    }, 30000);
+  }
+});
+
