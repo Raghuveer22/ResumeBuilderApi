@@ -211,20 +211,29 @@ form.addEventListener('submit', (event) => {
         },
         body: JSON.stringify(jsonData)
       })
-        .then(response => response.blob())
-        .then(blob=> {
-          // Handle the response from the server if needed
-          const url = URL.createObjectURL(blob);
-          window.open(url, '_blank');
-          console.log(url);
-          console.log(blob);
-          // Alternatively, you can set the URL as the source of an iframe to display it within the page
-          // const iframe = document.createElement('iframe');
-          // iframe.src = url;
-          // document.body.appendChild(iframe);
-        })
-        .catch(error => {
-          // Handle any errors that occurred during the request
-          console.error('Error:', error);
-        });
+      .then(response => {
+        if (response.ok) {
+            return response.blob();
+        } else {
+            throw new Error('Invalid data');
+        }
+    })
+    .then(blob => {
+        // Handle the successful response
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+        console.log(url);
+        console.log(blob);
+
+        // Alternatively, you can set the URL as the source of an iframe to display it within the page
+        // const iframe = document.createElement('iframe');
+        // iframe.src = url;
+        // document.body.appendChild(iframe);
+    })
+    .catch(error => {
+        // Handle the error response
+        console.error('Error:', error);
+        // Display an error message to the user
+        alert('An error occurred. Please check your data and try again.');
+    });
 });
