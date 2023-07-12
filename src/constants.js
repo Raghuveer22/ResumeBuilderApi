@@ -1,6 +1,7 @@
 const mailRegexPattern=/^[\w\.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/;
 const linkedinProfileURLRegexPattern=/^(https?:\/\/)?(www\.)?linkedin\.com\/(in|pub|company|groups|edu|feed)\/[a-zA-Z0-9\-]+\/?$/;
 const phoneNumberRegexPattern= /^\+\d{1,3}\s\d{4,}$/;
+
 const docxPaths = {
     "1": "./Templates/Template1/BasicTemplate.docx",
     "2": "./Templates/Template2/LinkTemplate.docx",
