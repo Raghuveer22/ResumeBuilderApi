@@ -249,7 +249,7 @@ form.addEventListener('submit', (event) => {
             button.disabled = false;
           });
         // Display an error message to the user
-        alert('An error occurred. Please check your data and try again.');
+        alert(error);
     });
   
 });
