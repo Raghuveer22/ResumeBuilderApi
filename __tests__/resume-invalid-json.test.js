@@ -1,12 +1,14 @@
 const supertest = require("supertest");
 const app = require("../src/api-app");
 const { expect } = require("@jest/globals");
-const { resumeSuccessData, resumeFieldTypes, personalInformationFieldTypes,notMatchingLinkedInURLs,notMatchingPhoneNumbers,notMatchingEmails} = require('../src/constants');
+const { resumeSuccessData, resumeFieldTypes, personalInformationFieldTypes,educationFieldTypes,achievementFieldTypes,experienceFieldTypes,notMatchingLinkedInURLs,notMatchingPhoneNumbers,notMatchingEmails} = require('../src/constants');
 
 
 const resumeFieldKeys = Object.keys(resumeFieldTypes);
 const personalInformationFieldKeys = Object.keys(personalInformationFieldTypes);
-
+const educationFieldKeys = Object.keys(educationFieldTypes);
+const experienceFieldKeys = Object.keys(experienceFieldTypes);
+const achievementFieldKeys=Object.keys(achievementFieldTypes);
 const server = app.listen(0, () => {
   const port = server.address().port;
   console.log(`Server started on port ${port}`);
@@ -164,3 +166,64 @@ describe("POST /resume with invalid Email in personal details", () => {
   }
 });
 
+describe("POST /resume with missing fields in education", () => {
+  for (const field of educationFieldKeys) {
+    test(`should respond with a 400 status code when ${field} is missing in education`, async () => {
+      const data = JSON.parse(JSON.stringify(resumeSuccessData));
+      const paramName = field;
+      data.education[0] = ExcludeParameter(resumeSuccessData.education[0], paramName);
+      const response = await supertest(app)
+        .post("/resume")
+        .set("Accept", "application/pdf")
+        .set("Content-Type", "application/json")
+        .send(data);
+      expect(response.status).toEqual(400);
+    }, 30000);
+  }
+});
+describe("POST /resume with missing fields in exeperience", () => {
+  for (const field of experienceFieldKeys) {
+    test(`should respond with a 400 status code when ${field} is missing in education`, async () => {
+      const data = JSON.parse(JSON.stringify(resumeSuccessData));
+      const paramName = field;
+      data.experience[0] = ExcludeParameter(resumeSuccessData.experience[0], paramName);
+      const response = await supertest(app)
+        .post("/resume")
+        .set("Accept", "application/pdf")
+        .set("Content-Type", "application/json")
+        .send(data);
+      expect(response.status).toEqual(400);
+    }, 30000);
+  }
+});
+
+describe("POST /resume with missing fields in exeperience", () => {
+  for (const field of experienceFieldKeys) {
+    test(`should respond with a 400 status code when ${field} is missing in education`, async () => {
+      const data = JSON.parse(JSON.stringify(resumeSuccessData));
+      const paramName = field;
+      data.experience[0] = ExcludeParameter(resumeSuccessData.experience[0], paramName);
+      const response = await supertest(app)
+        .post("/resume")
+        .set("Accept", "application/pdf")
+        .set("Content-Type", "application/json")
+        .send(data);
+      expect(response.status).toEqual(400);
+    }, 30000);
+  }
+});
+describe("POST /resume with missing fields in achievements", () => {
+  for (const field of achievementFieldKeys) {
+    test(`should respond with a 400 status code when ${field} is missing in achievement`, async () => {
+      const data = JSON.parse(JSON.stringify(resumeSuccessData));
+      const paramName = field;
+      data.achievements[0] = ExcludeParameter(resumeSuccessData.achievements[0], paramName);
+      const response = await supertest(app)
+        .post("/resume")
+        .set("Accept", "application/pdf")
+        .set("Content-Type", "application/json")
+        .send(data);
+      expect(response.status).toEqual(400);
+    }, 30000);
+  }
+});
