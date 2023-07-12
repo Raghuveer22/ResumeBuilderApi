@@ -1,3 +1,5 @@
+const { response } = require("../src/api-app");
+
 const dictionary = {
     1: 'Basic Template',
     2: 'Link Template',
@@ -214,9 +216,10 @@ form.addEventListener('submit', (event) => {
     .then(blob=> {
       // Handle the response from the server if needed
       const url = URL.createObjectURL(blob);
-      window.open(url, '_blank');
-      console.log(url);
-      console.log(blob);
+      if(response.status==200)
+      {
+          window.open(url, '_blank');
+      }
     //   Alternatively, you can set the URL as the source of an iframe to display it within the page
     //   const iframe = document.createElement('iframe');
     //   iframe.src = url;
