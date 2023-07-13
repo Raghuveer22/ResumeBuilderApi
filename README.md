@@ -101,7 +101,7 @@ To use the API:
 
 2. Send a POST request to `http://localhost:8080/resume` with the necessary data in the request body to generate a resume in PDF format and 
 the view is hosted at `http://localhost:3000`
-Please note that the API is intended to be consumed programmatically and does not have a dedicated user interface. It is recommended to use tools like Postman or cURL to interact with the API endpoints programmatically.
+
 
 ## Unit Testing
 
