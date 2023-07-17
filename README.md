@@ -1,6 +1,10 @@
 # Resume Generator API using AdobePdfServices SDK
 
-This is a Node.js API for generating professional resumes using the AdobePdfServices SDK. It allows users to create resumes by sending a POST request with the required information and generates a PDF document based on the provided data.
+This is a Node.js API with UI for users to interact and send a POST request for generating professional resumes using the AdobePdfServices SDK.
+
+Website: The website for generating resumes is hosted at [Resume Builder](https://huggingface.co/spaces/Moki2004/ResumeBuilder). You can access the website to create professional resumes using a user-friendly interface.
+
+
 
 ## File Structure
 
@@ -100,7 +104,7 @@ To use the API:
    ```
 
 2. Send a POST request to `http://localhost:8080/resume` with the necessary data in the request body to generate a resume in PDF format and 
-the view is hosted at `http://localhost:3000`
+the user interface is hosted at `http://localhost:3000`
 
 
 ## Unit Testing
@@ -116,3 +120,4 @@ Conducted unit tests over 77 cases and 5 test suites
 This project is licensed under the [MIT License](LICENSE).
 
 Feel free to explore and modify the API according to your needs!
+
