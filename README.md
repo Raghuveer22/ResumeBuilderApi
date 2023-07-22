@@ -2,7 +2,7 @@
 
 This is a Node.js API with UI for users to interact and send a POST request for generating professional resumes using the AdobePdfServices SDK.
 
-Website: The website for generating resumes is hosted at [Resume Builder](https://huggingface.co/spaces/Moki2004/ResumeBuilder). You can access the website to create professional resumes using a user-friendly interface. remember to give data exactly described in [constants.js](src/constant.js)
+Website: The website for generating resumes is hosted at [Resume Builder](https://huggingface.co/spaces/Moki2004/ResumeBuilder). You can access the website to create professional resumes using a user-friendly interface. remember to give data exactly described in [constants.js](src/constants.js)
 
 ## File Structure
 
